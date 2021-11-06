@@ -10,6 +10,7 @@ import MainPage from './MainPage/MainPage';
 import VCInfo from './Recommendations/Recommendation/VCInfo/VCInfo';
 import { ReactComponent as Menu } from '../assets/menu.svg';
 import Recommendations from './Recommendations/Recommendations';
+import { moneyOptions, stageRows } from './Step1/data';
 
 
 const useStyles = makeStyles({
@@ -37,7 +38,11 @@ const useStyles = makeStyles({
 
 export default function Main() {
     const classes = useStyles();
-
+    const [checkboxes, setCheckboxes] = useState<boolean[]>(Array(stageRows.flat().length).fill(false));
+    const [market, setMarket] = useState<string>('');
+    const [stage, setStage] = useState<string>('');
+    const [tech, setTech] = useState<string[]>([]);
+    const [money, setMoney] = useState([1, moneyOptions.length]);
 
     return (
         <Router>
@@ -49,17 +54,35 @@ export default function Main() {
                     <Menu className={classes.sidebar} />
                 </div>
 
-                    {/* <Route exact path="/recommendation-system/vc/:i" render={() => <VCInfo selected={selected} setSelected={setSelected} />} /> */}
-                    {/* <Route exact path="/recommendation-system/result" render={() => <Recommendations selected={selected} setSelected={setSelected} />} /> */}
-                    <Route path="/recommendation-system/result" render={() => <Recommendations/>} />
+                <Route path="/recommendation-system/result" render={() =>
+                    <Recommendations
+                        checkboxes={checkboxes}
+                        setCheckboxes={setCheckboxes}
+                        market={market}
+                        setMarket={setMarket}
+                        stage={stage}
+                        setStage={setStage}
+                        tech={tech}
+                        setTech={setTech}
+                        money={money}
+                        setMoney={setMoney}
+                    />} />
 
-                    <Route exact path="/recommendation-system/" component={Step1} />
-                    <Route exact path="/" component={MainPage} />
-
-
+                <Route exact path="/recommendation-system/" render={() =>
+                    <Step1
+                        checkboxes={checkboxes}
+                        setCheckboxes={setCheckboxes}
+                        market={market}
+                        setMarket={setMarket}
+                        stage={stage}
+                        setStage={setStage}
+                        tech={tech}
+                        setTech={setTech}
+                        money={money}
+                        setMoney={setMoney}
+                    />} />
+                <Route exact path="/" component={MainPage} />
             </div>
-
-
         </Router>
     )
 }

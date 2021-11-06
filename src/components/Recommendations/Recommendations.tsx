@@ -9,9 +9,23 @@ import RecommendationsList from './RecommendationsList';
 import ApplicationsList from './Applications/Applications';
 import Favourites from './Favourites';
 import MakeApplications from './Applications/MakeApplications';
+import RiskWarning from './RiskWarning/RiskWarning';
 
 
-export default function Recommendations() {
+interface RecommendationsProps {
+    checkboxes: boolean[];
+    setCheckboxes: (value: boolean[]) => void;
+    market: string;
+    setMarket: (value: string) => void;
+    stage: string;
+    setStage: (value: string) => void;
+    tech: string[];
+    setTech: (value: string[]) => void;
+    money: number[];
+    setMoney: (value: number[]) => void;
+}
+
+export default function Recommendations({ checkboxes, setCheckboxes, market, setMarket, stage, setStage, tech, setTech, money, setMoney }: RecommendationsProps) {
 
     const [selected, setSelected] = useState({ 'vc': [] as number[], 'ac': [] as number[] });
     const [favVC, setFavVC] = useState([] as number[]);
@@ -68,6 +82,18 @@ export default function Recommendations() {
                 />
             }
             />
+
+            <Route exact path="/recommendation-system/result/risk-warning" render={() =>
+                <RiskWarning
+                    vcs={vcs}
+                    accs={vcs}
+                    selected={selected}
+                    favVC={favVC}
+                    setFavVC={setFavVC}
+                    favACC={favACC}
+                    setFavACC={setFavACC}
+                />} />
+
             <Route exact path="/recommendation-system/result/favorites" render={() =>
                 <Favourites
                     vcs={Object.keys(vcs).filter(id => favVC.includes(parseInt(id))).reduce((obj: any, key: string) => {

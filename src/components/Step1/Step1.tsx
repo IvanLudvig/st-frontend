@@ -163,15 +163,21 @@ const useStyles = makeStyles({
 });
 
 
-export default function Step1() {
-    const classes = useStyles();
+interface Step1Props {
+    checkboxes: boolean[];
+    setCheckboxes: (value: boolean[]) => void;
+    market: string;
+    setMarket: (value: string) => void;
+    stage: string;
+    setStage: (value: string) => void;
+    tech: string[];
+    setTech: (value: string[]) => void;
+    money: number[];
+    setMoney: (value: number[]) => void;
+}
 
-    const [checkboxes, setCheckboxes] = useState<boolean[]>(Array(stageRows.flat().length).fill(false));
-    const [market, setMarket] = useState<string>('');
-    const [stage, setStage] = useState<string>('');
-    const [tech, setTech] = useState<string[]>([]);
-    const [onlyStartups, setOnlyStartups] = useState(false);
-    const [money, setMoney] = useState([1, moneyOptions.length]);
+export default function Step1({ checkboxes, setCheckboxes, market, setMarket, stage, setStage, tech, setTech, money, setMoney }: Step1Props) {
+    const classes = useStyles();
 
     const onCheckboxChange = (i: number) => (value: boolean) => {
         const newCheckboxes = [...checkboxes];

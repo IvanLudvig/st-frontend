@@ -104,19 +104,10 @@ export default function Favourites({ vcs, accs, selected, favVC, setFavVC, favAC
 
                 <div className={classes.title}>
                     Избранное
-                    <Button className={classes.btn} variant='contained' component={Link} to={`/recommendation-system/result/make-applications`}>
+                    <Button className={classes.btn} variant='contained' component={Link} to={`/recommendation-system/result/risk-warning`}>
                         Сформировать заявки
                     </Button>
                 </div>
-
-
-
-                {/* <div className={classes.subtitle}>
-                    Подберите необходимые параметры
-                </div>
-                <div className={classes.sublabel}>
-                    Заполните данные для поиска
-                </div> */}
 
 
             </div>
