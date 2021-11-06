@@ -14,10 +14,6 @@ const useStyles = makeStyles({
         top: '93px',
         left: '358px',
         fontFamily: 'IBM Plex Sans',
-        background: '#ff0000',
-        // paddingBottom: '1800px',
-        // height: '1500px'
-        // height: '100%',
     },
     bar: {
         margin: 0,
