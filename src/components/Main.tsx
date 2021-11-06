@@ -23,9 +23,6 @@ const useStyles = makeStyles({
 export default function Main() {
     const classes = useStyles();
 
-    useEffect(() => {
-        document.body.style.backgroundColor = '#F2F3F6';
-    }, []);
     const [selected, setSelected] = useState([false, false]);
 
     return (

@@ -72,9 +72,6 @@ const useStyles = makeStyles({
 export default function MainPage() {
     const classes = useStyles();
 
-    useEffect(() => {
-        document.body.style.backgroundColor = '#F2F3F6';
-    }, []);
 
     return (
         <div className={classes.content}>
