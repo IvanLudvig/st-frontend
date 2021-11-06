@@ -5,6 +5,7 @@ import { ReactComponent as StarIcon } from '../../../assets/icons/star.svg';
 import { ReactComponent as Watch } from '../../../assets/icons/watch.svg';
 import Zerno from '../../../assets/zerno.jpg';
 import { ReactComponent as StarGrey } from '../../../assets/star.svg';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -153,6 +154,26 @@ const useStyles = makeStyles({
             background: darken('#F2F3F6', 0.2),
         }
     },
+    favbtnUn: {
+        display: 'inline-block',
+        lineHeight: '40px',
+        borderRadius: '5px',
+        alignText: 'center',
+        border: '1px solid #D7DEF2',
+        boxSizing: 'border-box',
+        float: 'right',
+        width: '40px',
+        height: '40px',
+        marginLeft: '12px',
+        background: '#fff',
+        textTransform: 'uppercase',
+        fontWeight: 600,
+        fontSize: '13px',
+        'cursor': 'pointer',
+        '&:hover': {
+            background: darken('#F2F3F6', 0.2),
+        }
+    },
     awaiting: {
         marginLeft: '4px',
         fontSize: '14px',
@@ -169,14 +190,14 @@ const useStyles = makeStyles({
 
 interface RecommendationProps {
     vc: any;
+    type: string;
     id: number;
     selected: boolean;
-    setShowVC: (id: number) => void;
     fav: boolean;
     setFav: () => void;
 }
 
-export default function Recommendation({ vc, id, selected, setShowVC, fav, setFav }: RecommendationProps) {
+export default function Recommendation({ vc, type, id, selected, fav, setFav }: RecommendationProps) {
     const classes = useStyles();
 
     const fields = ['тип', 'Объем фонда, $ млн', 'Количество инвестиций', 'Exit', 'Год основания'];
@@ -221,7 +242,7 @@ export default function Recommendation({ vc, id, selected, setShowVC, fav, setFa
                 <div className={classes.stats}>
                     {fields.map((field: string, i: number) =>
                         <>
-                            {values[i] &&
+                            {values[i] ?
                                 <div className={classes.stat}>
                                     <div className={classes.statLabel}>
                                         {field}
@@ -229,7 +250,7 @@ export default function Recommendation({ vc, id, selected, setShowVC, fav, setFa
                                     <div className={classes.statNumber}>
                                         {values[i]}
                                     </div>
-                                </div>}
+                                </div> : <></>}
                         </>
                     )}
                 </div>
@@ -251,16 +272,20 @@ export default function Recommendation({ vc, id, selected, setShowVC, fav, setFa
                         </>
                         :
                         <>
-                            <Button className={classes.morebtn} variant='contained' onClick={() => setShowVC(id)}>
+                            <Button className={classes.morebtn} variant='contained' component={Link} to={`/recommendation-system/result/${type}/${id}`}>
                                 Подробнее
                             </Button>
+                            {!fav ?
 
-                            <div className={classes.favbtn} onClick={() => setFav()}>
-                                {!fav ?
+                                <div className={classes.favbtnUn} onClick={() => setFav()}>
                                     <StarGrey display='block' style={{ margin: 'auto', marginTop: '10px' }} />
-                                    : <StarIcon display='block' style={{ margin: 'auto', marginTop: '10px' }} />
-                                }
-                            </div>
+                                </div>
+                                :
+                                <div className={classes.favbtn} onClick={() => setFav()}>
+                                    <StarIcon display='block' style={{ margin: 'auto', marginTop: '10px' }} />
+                                </div>
+                            }
+
                         </>
                     }
 

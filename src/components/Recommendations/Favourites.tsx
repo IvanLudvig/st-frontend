@@ -7,6 +7,7 @@ import Accelerators from './Accelerators';
 import { ReactComponent as Star } from '../../assets/star.svg';
 import { ReactComponent as Stack } from '../../assets/stack.svg';
 import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
@@ -64,42 +65,48 @@ const useStyles = makeStyles({
     icon: {
         marginBottom: '-2px',
         marginRight: '6px'
-    }
+    },
+    btn: {
+        display: 'inline-block',
+        float: 'right',
+        width: '204px',
+        height: '40px',
+        marginRight: '60px',
+        color: '#fff',
+        background: '#0458FE',
+        textTransform: 'uppercase',
+        lineHeight: '25px',
+        borderRadius: '5px',
+        fontWeight: 600,
+        fontSize: '13px',
+        '&:hover': {
+            background: darken('#0458FE', 0.2),
+        }
+    },
 });
 
 interface RecommendationsListProps {
     vcs: any;
     accs: any;
-    selected: boolean[];
-    setSelected: (value: boolean[]) => void;
+    selected: any;
     favVC: number[];
     setFavVC: (value: number[]) => void;
     favACC: number[];
     setFavACC: (value: number[]) => void;
 }
 
-export default function Favourites({ vcs, accs, selected, setSelected, favVC, setFavVC, favACC, setFavACC }: RecommendationsListProps) {
+export default function Favourites({ vcs, accs, selected, favVC, setFavVC, favACC, setFavACC }: RecommendationsListProps) {
     const classes = useStyles();
-    const [selectedType, setSelectedType] = useState(recommendation_types[0]);
-    const [showVC, setShowVC] = useState(-1);
 
-    const setSelectedVC = (id: number) => (value: boolean) => {
-        const newselectedAll = [...selected];
-        newselectedAll[id] = value;
-        setSelected(newselectedAll);
-    }
-
-
-    if (showVC !== -1) {
-        //@ts-ignore
-        return <VCInfo vc={vcs[(showVC + '')] as any} selected={selected[showVC]} setSelected={setSelectedVC(showVC)} setShowVC={setShowVC} />
-    }
     return (
         <div className={classes.content}>
             <div className={classes.header}>
 
                 <div className={classes.title}>
                     Избранное
+                    <Button className={classes.btn} variant='contained' component={Link} to={`/recommendation-system/result/applications`}>
+                        Сформировать заявки
+                    </Button>
                 </div>
 
 
@@ -134,8 +141,14 @@ export default function Favourites({ vcs, accs, selected, setSelected, favVC, se
                     </span>
                 </Link>
             </div>
-            <VCFunds vcs={vcs} selected={selected} setSelected={setSelectedVC} setShowVC={setShowVC} favList={favVC} setFav={setFavVC} />
-            <Accelerators vcs={accs} selected={selected} setSelected={setSelectedVC} setShowVC={setShowVC} favList={favACC} setFav={setFavACC}  />
+            {Object.keys(vcs).length ?
+                <VCFunds vcs={vcs} selected={selected['vc']} favList={favVC} setFav={setFavVC} />
+                : <></>
+            }
+            {Object.keys(accs).length ?
+                <Accelerators vcs={accs} selected={selected['ac']} favList={favACC} setFav={setFavACC} />
+                : <></>
+            }
         </div>
 
     )

@@ -116,30 +116,18 @@ const useStyles = makeStyles({
 interface RecommendationsListProps {
     vcs: any;
     accs: any;
-    selected: boolean[];
-    setSelected: (value: boolean[]) => void;
+    selected: any;
     favVC: number[];
     setFavVC: (value: number[]) => void;
     favACC: number[];
     setFavACC: (value: number[]) => void;
 }
 
-export default function RecommendationsList({ vcs, accs, selected, setSelected, favVC, setFavVC, favACC, setFavACC }: RecommendationsListProps) {
+export default function RecommendationsList({ vcs, accs, selected, favVC, setFavVC, favACC, setFavACC }: RecommendationsListProps) {
     const classes = useStyles();
     const [selectedType, setSelectedType] = useState(recommendation_types[0]);
     const [showVC, setShowVC] = useState(-1);
 
-    const setSelectedVC = (id: number) => (value: boolean) => {
-        const newselectedAll = [...selected];
-        newselectedAll[id] = value;
-        setSelected(newselectedAll);
-    }
-
-
-    if (showVC !== -1) {
-        //@ts-ignore
-        return <VCInfo vc={vcs[(showVC + '')] as any} selected={selected[showVC]} setSelected={setSelectedVC(showVC)} setShowVC={setShowVC} />
-    }
     return (
         <div className={classes.content}>
             <div className={classes.header}>
@@ -202,8 +190,8 @@ export default function RecommendationsList({ vcs, accs, selected, setSelected, 
                     </span>
                 </Link>
             </div>
-            <VCFunds vcs={vcs} selected={selected} setSelected={setSelectedVC} setShowVC={setShowVC} favList={favVC} setFav={setFavVC} />
-            <Accelerators vcs={accs} selected={selected} setSelected={setSelectedVC} setShowVC={setShowVC} favList={favACC} setFav={setFavACC} />
+            <VCFunds vcs={vcs} selected={selected['vc']} favList={favVC} setFav={setFavVC} />
+            <Accelerators vcs={accs} selected={selected['ac']} favList={favACC} setFav={setFavACC}  />
         </div>
 
     )

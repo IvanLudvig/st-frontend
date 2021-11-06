@@ -26,14 +26,12 @@ const useStyles = makeStyles({
 
 interface AcceleratorsProps {
     vcs: any;
-    selected: boolean[];
-    setSelected: (id: number) => (value: boolean) => void;
-    setShowVC: (id: number) => void;
+    selected: number[];
     favList: number[];
     setFav: (value: number[]) => void;
 }
 
-export default function Accelerators({ vcs, selected, setSelected, setShowVC, favList, setFav }: AcceleratorsProps) {
+export default function Accelerators({ vcs, selected, favList, setFav }: AcceleratorsProps) {
     const classes = useStyles();
 
     const toggleFav = (id: number) => () => {
@@ -50,8 +48,8 @@ export default function Accelerators({ vcs, selected, setSelected, setShowVC, fa
             <div className={classes.heading}>
                 Акселераторы
             </div>
-            {Object.values(vcs).map((vc, id) =>
-                <Recommendation vc={vc} id={id} selected={selected[id]} setShowVC={setShowVC} fav={favList.includes(id)} setFav={toggleFav(id)} />
+            {Object.keys(vcs).map((id) =>
+                <Recommendation vc={vcs[id]} type='ac' id={parseInt(id)} selected={selected.includes(parseInt(id))} fav={favList.includes(parseInt(id))} setFav={toggleFav(parseInt(id))} />
             )}
 
         </div >

@@ -26,14 +26,12 @@ const useStyles = makeStyles({
 
 interface VCFundsProps {
     vcs: any;
-    selected: boolean[];
-    setSelected: (id: number) => (value: boolean) => void;
-    setShowVC: (id: number) => void;
+    selected: number[];
     favList: number[];
     setFav: (value: number[]) => void;
 }
 
-export default function VCFunds({ vcs, selected, setSelected, setShowVC, favList, setFav }: VCFundsProps) {
+export default function VCFunds({ vcs, selected, favList, setFav }: VCFundsProps) {
     const classes = useStyles();
 
     const toggleFav = (id: number) => () => {
@@ -50,9 +48,10 @@ export default function VCFunds({ vcs, selected, setSelected, setShowVC, favList
             <div className={classes.heading}>
                 Венчурные фонды
             </div>
-            {Object.values(vcs).map((vc: any, id: number) =>
-                <Recommendation vc={vc} id={id} selected={selected[id]} setShowVC={setShowVC} fav={favList.includes(id)} setFav={toggleFav(id)} />
+            {Object.keys(vcs).map((id) =>
+                <Recommendation vc={vcs[id]} type='vc' id={parseInt(id)} selected={selected.includes(parseInt(id))} fav={favList.includes(parseInt(id))} setFav={toggleFav(parseInt(id))} />
             )}
+
 
         </div >
     )

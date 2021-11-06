@@ -17,7 +17,7 @@ const useStyles = makeStyles({
         marginLeft: '358px',
         display: 'inline-block',
         height: '100%',
-        marginBottom: '100px',
+        marginBottom: '93px',
         background: '#fff'
     },
     header: {
@@ -70,30 +70,17 @@ const useStyles = makeStyles({
 interface RecommendationsListProps {
     vcs: any;
     accs: any;
-    selected: boolean[];
-    setSelected: (value: boolean[]) => void;
+    selected: any;
     favVC: number[];
     setFavVC: (value: number[]) => void;
     favACC: number[];
     setFavACC: (value: number[]) => void;
 }
 
-export default function ApplicationsList({ vcs, accs, selected, setSelected, favVC, setFavVC, favACC, setFavACC }: RecommendationsListProps) {
+export default function ApplicationsList({ vcs, accs, selected, favVC, setFavVC, favACC, setFavACC }: RecommendationsListProps) {
     const classes = useStyles();
     const [selectedType, setSelectedType] = useState(recommendation_types[0]);
-    const [showVC, setShowVC] = useState(-1);
 
-    const setSelectedVC = (id: number) => (value: boolean) => {
-        const newselectedAll = [...selected];
-        newselectedAll[id] = value;
-        setSelected(newselectedAll);
-    }
-
-
-    if (showVC !== -1) {
-        //@ts-ignore
-        return <VCInfo vc={vcs[(showVC + '')] as any} selected={selected[showVC]} setSelected={setSelectedVC(showVC)} setShowVC={setShowVC} />
-    }
     return (
         <div className={classes.content}>
             <div className={classes.header}>
@@ -134,8 +121,14 @@ export default function ApplicationsList({ vcs, accs, selected, setSelected, fav
                     </span>
                 </Link>
             </div>
-            <VCFunds vcs={vcs} selected={selected} setSelected={setSelectedVC} setShowVC={setShowVC} favList={favVC} setFav={setFavVC} />
-            <Accelerators vcs={accs} selected={selected} setSelected={setSelectedVC} setShowVC={setShowVC} favList={favACC} setFav={setFavACC}  />
+            {Object.keys(vcs).length ?
+                <VCFunds vcs={vcs} selected={selected['vc']} favList={favVC} setFav={setFavVC} />
+                : <></>
+            }
+            {Object.keys(accs).length ?
+                <Accelerators vcs={accs} selected={selected['ac']} favList={favACC} setFav={setFavACC} />
+                : <></>
+            }
         </div>
 
     )

@@ -138,23 +138,32 @@ const useStyles = makeStyles({
 });
 
 interface VCInfoProps {
-    vc: any;
-    selected: boolean;
-    setSelected: (value: boolean) => void;
-    setShowVC: (value: number) => void;
+    vcs: any;
+    selectedAll: number[];
+    setSelectedAll: (value: number[]) => void;
 }
 
-export default function VCInfo({ vc, selected, setSelected, setShowVC }: VCInfoProps) {
+export default function VCInfo({ vcs, selectedAll, setSelectedAll }: VCInfoProps) {
     const classes = useStyles();
 
+    
     // const { id } = useParams().match.params;
     // console.log(id);
-    // const split = window.location.href.split('/');
-    // const id = parseInt(split[split.length - 1]);
+    const split = window.location.href.split('/');
+    const id = parseInt(split[split.length - 1]);
     // console.log(split);
     // console.log(id);
 
+    const selected = selectedAll.includes(id);
+    const setSelected = () => {
+        if (selectedAll.includes(id)) {
+            setSelectedAll(selectedAll.filter(f => f !== id));
+        } else {
+            setSelectedAll([...selectedAll, id]);
+        }
+    }
 
+    const vc = vcs[id];
     const fields = ['РАУНДЫ ИНВЕСТИРОВАНИЯ', 'тип', 'Количество инвестиций', 'Exit', 'Год основания'];
     const values = [vc['Раунд инвестирования'], `${vc['Тип по источнику возник-ния']}, ${vc['Форма собственности']}`,
     vc['Количество инвестиций'], vc['Количество выходов'], vc['Год основания']
@@ -165,7 +174,7 @@ export default function VCInfo({ vc, selected, setSelected, setShowVC }: VCInfoP
 
     return (
         <div className={classes.container}>
-            <TopBar title='Zerno ventures' setShowVC={setShowVC} />
+            <TopBar title='Zerno ventures' />
             <div className={classes.iconContainer}>
                 <img className={classes.icon} />
             </div>
@@ -205,7 +214,7 @@ export default function VCInfo({ vc, selected, setSelected, setShowVC }: VCInfoP
                 </div>
 
                 <div className={classes.actions}>
-                    <Button className={classes.btn} variant='contained' onClick={() => setSelected(!selected)}>
+                    <Button className={classes.btn} variant='contained' onClick={() => setSelected()}>
                         {selected ? 'Добавлено к заявке' : '+Добавить  к заявке'}
                     </Button>
                     {/* <Button className={classes.btn} variant='contained' onClick={() => setSelected(!selected)}>

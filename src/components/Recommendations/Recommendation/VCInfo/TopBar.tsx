@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { darken, lighten, makeStyles } from "@material-ui/core/styles";
 import { ReactComponent as Back } from '../../../../assets/icons/back.svg';
 import { ReactComponent as Right } from '../../../../assets/icons/right.svg';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -39,17 +40,18 @@ const useStyles = makeStyles({
 
 interface TopBarProps {
     title: string;
-    setShowVC: (value: number) => void;
 }
-export default function TopBar({ title, setShowVC }: TopBarProps) {
+export default function TopBar({ title }: TopBarProps) {
     const classes = useStyles();
 
     return (
         <div className={classes.topBar}>
-            <div className={classes.backbtn} onClick={() => setShowVC(-1)}>
-                <Back />
-                <span className={classes.label}>Назад</span>
-            </div>
+            <Link to='/recommendation-system/result'>
+                <div className={classes.backbtn}>
+                    <Back />
+                    <span className={classes.label}>Назад</span>
+                </div>
+            </Link>
             <span className={classes.path}>
                 Венчурные фонды <Right /> Zerno Ventures
             </span>
