@@ -3,11 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { recommendation_types, vcs } from '../Step1/data';
 import VCFunds from './VCs/VCFunds';
 import VCInfo from './Recommendation/VCInfo/VCInfo';
-import Accelerators from './Accelerators';
+import Accelerators from './Accelerators/Accelerators';
 import { Route, Switch } from 'react-router-dom';
 import RecommendationsList from './RecommendationsList';
-import ApplicationsList from './Applications';
+import ApplicationsList from './Applications/Applications';
 import Favourites from './Favourites';
+import MakeApplications from './Applications/MakeApplications';
 
 
 export default function Recommendations() {
@@ -27,6 +28,26 @@ export default function Recommendations() {
         <Switch>
             <Route path="/recommendation-system/result/applications" render={() =>
                 <ApplicationsList
+                    vcs={Object.keys(vcs).filter(id => selected['vc'].includes(parseInt(id))).reduce((obj: any, key: string) => {
+                        //@ts-ignore
+                        obj[key] = vcs[key] as any;
+                        return obj;
+                    }, {})}
+                    accs={Object.keys(vcs).filter(id => selected['ac'].includes(parseInt(id))).reduce((obj: any, key: string) => {
+                        //@ts-ignore
+                        obj[key] = vcs[key] as any;
+                        return obj;
+                    }, {})}
+                    selected={selected}
+                    favVC={favVC}
+                    setFavVC={setFavVC}
+                    favACC={favACC}
+                    setFavACC={setFavACC}
+                />
+            }
+            />
+            <Route path="/recommendation-system/result/make-applications" render={() =>
+                <MakeApplications
                     vcs={Object.keys(vcs).filter(id => [...selected['vc'], ...favVC].includes(parseInt(id))).reduce((obj: any, key: string) => {
                         //@ts-ignore
                         obj[key] = vcs[key] as any;
@@ -37,14 +58,13 @@ export default function Recommendations() {
                         obj[key] = vcs[key] as any;
                         return obj;
                     }, {})}
-                    selected={{
-                        'ac': [...selected['ac'], ...favACC],
-                        'vc': [...selected['vc'], ...favVC]
-                    }}
+                    selected={selected}
                     favVC={favVC}
                     setFavVC={setFavVC}
                     favACC={favACC}
                     setFavACC={setFavACC}
+                    setSelectedType={setSelectedType}
+                    setSelected={setSelected}
                 />
             }
             />

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { darken, lighten, makeStyles } from "@material-ui/core/styles";
-import { Button } from '@material-ui/core';
-import { ReactComponent as StarIcon } from '../../../assets/icons/star.svg';
-import { ReactComponent as Watch } from '../../../assets/icons/watch.svg';
+import { Button, Checkbox } from '@material-ui/core';
+import { ReactComponent as Watch } from '../../../../../assets/icons/watch.svg';
 import Zerno from '../../../assets/zerno.jpg';
-import { ReactComponent as StarGrey } from '../../../assets/star.svg';
+import { ReactComponent as TrashCan } from '../../../../../assets/icons/trash.svg';
 import { Link } from 'react-router-dom';
 
 
@@ -13,13 +12,34 @@ const useStyles = makeStyles({
         position: 'static',
         marginLeft: '31px',
         width: '947px',
-        minHeight: '187px',
+        minHeight: '229px',
         boxShadow: '0px 4px 34px rgba(66, 76, 101, 0.08)',
         border: '1px solid #F8F8FB',
         borderRadius: '3px',
         paddingTop: '35px',
         marginBottom: '20px',
         paddingBottom: '20px'
+    },
+    topBar: {
+        height: '42px',
+        width: '912px',
+        marginLeft: '16px',
+        marginRight: '16px',
+        display: 'inline-block'
+        // lineHeight: '42px'
+    },
+    topBarLabel: {
+        display: 'inline-block',
+        color: '#0458FE',
+        fontSize: '9px',
+        textTransform: 'uppercase',
+        position: 'relative',
+        top: '-13px',
+        cursor: 'pointer'
+    },
+    line: {
+        width: '912px',
+        border: '1px dashed #E3E6ED'
     },
     info: {
         display: 'inline-block',
@@ -124,16 +144,13 @@ const useStyles = makeStyles({
         width: '115px',
         height: '40px',
         marginLeft: '12px',
-        color: '#fff',
+        color: '#69768F',
         background: '#0458FE',
         textTransform: 'uppercase',
         lineHeight: '25px',
         borderRadius: '5px',
         fontWeight: 600,
-        fontSize: '13px',
-        '&:hover': {
-            background: darken('#0458FE', 0.2),
-        }
+        fontSize: '13px'
     },
     favbtn: {
         display: 'inline-block',
@@ -151,7 +168,7 @@ const useStyles = makeStyles({
         fontSize: '13px',
         'cursor': 'pointer',
         '&:hover': {
-            background: darken('#F2F3F6', 0.2),
+            background: lighten('#F2F3F6', 0.3),
         }
     },
     favbtnUn: {
@@ -184,6 +201,20 @@ const useStyles = makeStyles({
         marginLeft: '15px',
         width: '60px',
         height: '60px'
+    },
+    checkbox: {
+        display: 'inline-block',
+        width: '15px',
+        margin: 0,
+        padding: 0,
+        marginTop: '-25px',
+        color: '#0458FE',
+        marginRight: '6px'
+    },
+    input: {
+        margin: 0,
+        padding: 0,
+        boxSizing: 'border-box'
     }
 });
 
@@ -194,19 +225,37 @@ interface RecommendationProps {
     id: number;
     selected: boolean;
     fav: boolean;
-    setFav: () => void;
+    setSelected: () => void;
 }
 
-export default function Recommendation({ vc, type, id, selected, fav, setFav }: RecommendationProps) {
+export default function Recommendation({ vc, type, id, selected, fav, setSelected }: RecommendationProps) {
     const classes = useStyles();
 
     const fields = ['тип', 'Объем фонда, $ млн', 'Количество инвестиций', 'Exit', 'Год основания'];
     const values = [`${vc['Тип по источнику возник-ния']}, ${vc['Форма собственности']}`, vc['Общий объем фондов, $ млн'], vc['Количество инвестиций'], vc['Количество выходов'], vc['Год основания']];
 
-    const applicationsPage = window.location.href.includes('applications');
+    const applicationsPage = false;
 
     return (
         <div className={classes.result}>
+            <div className={classes.topBar}>
+                <Checkbox className={classes.checkbox} checked={selected} onChange={setSelected}
+                    inputProps={{
+                        style: {
+                            padding: 0,
+                            margin: 0
+                        }
+                    }}
+                    style={{
+                        color: "#0458FE",
+                    }}
+                    classes={{ input: classes.input }}
+                />
+                <div className={classes.topBarLabel} onClick={setSelected}>
+                    {selected ? 'Выбран' : 'Выбрать'}
+                </div>
+                <hr className={classes.line} />
+            </div>
             <div className={classes.info}>
                 <img className={classes.icon} />
                 <div className={classes.titleContainer}>
@@ -274,19 +323,13 @@ export default function Recommendation({ vc, type, id, selected, fav, setFav }: 
                         </>
                         :
                         <>
-                            <Button className={classes.morebtn} variant='contained' component={Link} to={`/recommendation-system/result/${type}/${id}`}>
-                                Подробнее
+                            <Button disabled className={classes.morebtn} variant='contained' component={Link} to={`/recommendation-system/result/${type}/${id}`}>
+                                Отправить
                             </Button>
-                            {!fav ?
 
-                                <div className={classes.favbtnUn} onClick={() => setFav()}>
-                                    <StarGrey display='block' style={{ margin: 'auto', marginTop: '10px' }} />
-                                </div>
-                                :
-                                <div className={classes.favbtn} onClick={() => setFav()}>
-                                    <StarIcon display='block' style={{ margin: 'auto', marginTop: '10px' }} />
-                                </div>
-                            }
+                            <div className={classes.favbtn} >
+                                <TrashCan display='block' style={{ margin: 'auto', marginTop: '10px' }} />
+                            </div>
 
                         </>
                     }

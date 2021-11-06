@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { darken, makeStyles } from "@material-ui/core/styles";
-import { recommendation_types } from '../Step1/data';
-import VCFunds from './VCs/VCFunds';
-import VCInfo from './Recommendation/VCInfo/VCInfo';
-import Accelerators from './Accelerators/Accelerators';
-import { ReactComponent as Star } from '../../assets/star.svg';
-import { ReactComponent as Stack } from '../../assets/stack.svg';
+import { recommendation_types } from '../../Step1/data';
+import VCFunds from '../VCs/VCFunds';
+import VCInfo from '../Recommendation/VCInfo/VCInfo';
+import Accelerators from '../Accelerators/Accelerators';
+import { ReactComponent as Star } from '../../../assets/star.svg';
+import { ReactComponent as Stack } from '../../../assets/stack.svg';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
@@ -18,8 +17,8 @@ const useStyles = makeStyles({
         marginLeft: '358px',
         display: 'inline-block',
         height: '100%',
-        background: '#fff',
-        marginBottom: '93px'
+        marginBottom: '93px',
+        background: '#fff'
     },
     header: {
         background: '#24314A',
@@ -65,24 +64,7 @@ const useStyles = makeStyles({
     icon: {
         marginBottom: '-2px',
         marginRight: '6px'
-    },
-    btn: {
-        display: 'inline-block',
-        float: 'right',
-        width: '204px',
-        height: '40px',
-        marginRight: '60px',
-        color: '#fff',
-        background: '#0458FE',
-        textTransform: 'uppercase',
-        lineHeight: '25px',
-        borderRadius: '5px',
-        fontWeight: 600,
-        fontSize: '13px',
-        '&:hover': {
-            background: darken('#0458FE', 0.2),
-        }
-    },
+    }
 });
 
 interface RecommendationsListProps {
@@ -95,18 +77,16 @@ interface RecommendationsListProps {
     setFavACC: (value: number[]) => void;
 }
 
-export default function Favourites({ vcs, accs, selected, favVC, setFavVC, favACC, setFavACC }: RecommendationsListProps) {
+export default function ApplicationsList({ vcs, accs, selected, favVC, setFavVC, favACC, setFavACC }: RecommendationsListProps) {
     const classes = useStyles();
+    const [selectedType, setSelectedType] = useState(recommendation_types[0]);
 
     return (
         <div className={classes.content}>
             <div className={classes.header}>
 
                 <div className={classes.title}>
-                    Избранное
-                    <Button className={classes.btn} variant='contained' component={Link} to={`/recommendation-system/result/make-applications`}>
-                        Сформировать заявки
-                    </Button>
+                    Ваши заявки
                 </div>
 
 

@@ -3,7 +3,7 @@ import { darken, makeStyles } from "@material-ui/core/styles";
 import { recommendation_types, recommendation_types_map } from '../Step1/data';
 import VCFunds from './VCs/VCFunds';
 import VCInfo from './Recommendation/VCInfo/VCInfo';
-import Accelerators from './Accelerators';
+import Accelerators from './Accelerators/Accelerators';
 import { ReactComponent as Star } from '../../assets/star.svg';
 import { ReactComponent as Stack } from '../../assets/stack.svg';
 import { Link } from 'react-router-dom';

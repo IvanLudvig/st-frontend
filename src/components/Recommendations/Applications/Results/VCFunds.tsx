@@ -24,33 +24,34 @@ const useStyles = makeStyles({
 });
 
 
-interface AcceleratorsProps {
+interface VCFundsProps {
     vcs: any;
     selected: number[];
     favList: number[];
-    setFav: (value: number[]) => void;
+    setSelected: (value: number[]) => void;
 }
 
-export default function Accelerators({ vcs, selected, favList, setFav }: AcceleratorsProps) {
+export default function VCFunds({ vcs, selected, favList, setSelected }: VCFundsProps) {
     const classes = useStyles();
 
-    const toggleFav = (id: number) => () => {
-        if (favList.includes(id)) {
-            setFav(favList.filter(f => f !== id));
+    const toggleSel = (id: number) => () => {
+        if (selected.includes(id)) {
+            setSelected([...selected.filter(f => f !== id)]);
         } else {
-            setFav([...favList, id]);
+            setSelected([...selected, id]);
         }
     }
 
     return (
-        <div id='accs' className={classes.container}>
+        <div id='vcs' className={classes.container}>
             {/* <hr className={classes.line1} /> */}
             <div className={classes.heading}>
-                Акселераторы
+                Венчурные фонды
             </div>
             {Object.keys(vcs).map((id) =>
-                <Recommendation vc={vcs[id]} type='ac' id={parseInt(id)} selected={selected.includes(parseInt(id))} fav={favList.includes(parseInt(id))} setFav={toggleFav(parseInt(id))} />
+                <Recommendation vc={vcs[id]} type='vc' id={parseInt(id)} selected={selected.includes(parseInt(id))} fav={favList.includes(parseInt(id))} setSelected={toggleSel(parseInt(id))} />
             )}
+
 
         </div >
     )

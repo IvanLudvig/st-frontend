@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { darken, makeStyles } from "@material-ui/core/styles";
-import { recommendation_types } from '../Step1/data';
-import VCFunds from './VCs/VCFunds';
-import VCInfo from './Recommendation/VCInfo/VCInfo';
-import Accelerators from './Accelerators';
-import { ReactComponent as Star } from '../../assets/star.svg';
-import { ReactComponent as Stack } from '../../assets/stack.svg';
+import { recommendation_types } from '../../Step1/data';
+import VCFunds from './Results/VCFunds';
+import VCInfo from '../Recommendation/VCInfo/VCInfo';
+import Accelerators from './Results/Accelerators';
+import { ReactComponent as Star } from '../../../assets/star.svg';
+import { ReactComponent as Stack } from '../../../assets/stack.svg';
 import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
@@ -64,7 +65,24 @@ const useStyles = makeStyles({
     icon: {
         marginBottom: '-2px',
         marginRight: '6px'
-    }
+    },
+    btn: {
+        display: 'inline-block',
+        float: 'right',
+        width: '153px',
+        height: '40px',
+        marginRight: '60px',
+        color: '#fff',
+        background: '#0458FE',
+        textTransform: 'uppercase',
+        lineHeight: '25px',
+        borderRadius: '5px',
+        fontWeight: 600,
+        fontSize: '13px',
+        '&:hover': {
+            background: darken('#0458FE', 0.2),
+        }
+    },
 });
 
 interface RecommendationsListProps {
@@ -75,18 +93,29 @@ interface RecommendationsListProps {
     setFavVC: (value: number[]) => void;
     favACC: number[];
     setFavACC: (value: number[]) => void;
+    setSelectedType: (type: string) => (value: number[]) => void;
+    setSelected: (value: any) => void;
 }
 
-export default function ApplicationsList({ vcs, accs, selected, favVC, setFavVC, favACC, setFavACC }: RecommendationsListProps) {
+export default function MakeApplications({ vcs, accs, selected, favVC, setFavVC, favACC, setFavACC, setSelectedType, setSelected }: RecommendationsListProps) {
     const classes = useStyles();
-    const [selectedType, setSelectedType] = useState(recommendation_types[0]);
+
+    useEffect(() => {
+        setSelected({
+            'ac': [...selected['ac'], ...favACC],
+            'vc': [...selected['vc'], ...favVC]
+        });
+    }, []);
 
     return (
         <div className={classes.content}>
             <div className={classes.header}>
 
                 <div className={classes.title}>
-                    Ваши заявки
+                    Сформировать заявки
+                    <Button className={classes.btn} variant='contained' component={Link} to={`/recommendation-system/result/applications`}>
+                        Отправить всем
+                    </Button>
                 </div>
 
 
@@ -122,11 +151,11 @@ export default function ApplicationsList({ vcs, accs, selected, favVC, setFavVC,
                 </Link>
             </div>
             {Object.keys(vcs).length ?
-                <VCFunds vcs={vcs} selected={selected['vc']} favList={favVC} setFav={setFavVC} />
+                <VCFunds vcs={vcs} selected={selected['vc']} favList={favVC} setSelected={setSelectedType('vc')} />
                 : <></>
             }
             {Object.keys(accs).length ?
-                <Accelerators vcs={accs} selected={selected['ac']} favList={favACC} setFav={setFavACC} />
+                <Accelerators vcs={accs} selected={selected['ac']} favList={favACC} setSelected={setSelectedType('ac')} />
                 : <></>
             }
         </div>
