@@ -179,7 +179,7 @@ export default function VCInfo({ vcs, type, selectedAll, setSelectedAll }: VCInf
     const contact_values = [vc['Сайт'], vc['Ближайшая станция метро'], vc['Адрес'], vc['Тип оператора'], vc['Формат обучения:']];
 
     //@ts-ignore
-    const image_src = imageMap[vc['Название объекта']];
+    const image_src = imageMap[vc['Название объекта']] || imageMap[vc['Название программы']];
     return (
         <div className={classes.container}>
             <TopBar title='Zerno ventures' />

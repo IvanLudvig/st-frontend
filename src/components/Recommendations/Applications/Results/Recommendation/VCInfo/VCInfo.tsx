@@ -174,7 +174,7 @@ export default function VCInfo({ vcs, type, selectedAll, setSelectedAll }: VCInf
     const contact_fields = ['Сайт', 'Ближайшая станция метро', 'Адрес'];
     const contact_values = [vc['Сайт'], vc['Ближайшая станция метро'], vc['Адрем']];
     //@ts-ignore
-    const image_src = imageMap[vc['Название объекта']];
+    const image_src = imageMap[vc['Название объекта']] || imageMap[vc['Название программы']];
     return (
         <div className={classes.container}>
             <TopBar title='Zerno ventures' />
@@ -189,7 +189,7 @@ export default function VCInfo({ vcs, type, selectedAll, setSelectedAll }: VCInf
                         {type === 'vc' ? 'Венчурный фонд' : 'Акселератор'}
                     </div>
                     <div className={classes.title}>
-                        {vc['Название объекта']}
+                        {vc['Название объекта'] || vc['Название программы']}
                     </div>
                 </div>
                 <div className={classes.aboutSection}>

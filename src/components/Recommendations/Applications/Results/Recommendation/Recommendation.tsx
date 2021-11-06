@@ -240,7 +240,7 @@ export default function Recommendation({ vc, type, id, selected, fav, setSelecte
     }
     const applicationsPage = false;
     // @ts-ignore
-    const image_src = imageMap[vc['Название объекта']];
+    const image_src = imageMap[vc['Название объекта']] || imageMap[vc['Название программы']];
     return (
         <div className={classes.result}>
             <div className={classes.topBar}>

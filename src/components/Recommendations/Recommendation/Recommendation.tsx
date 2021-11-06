@@ -209,7 +209,7 @@ export default function Recommendation({ vc, type, id, selected, fav, setFav }: 
     }
     const applicationsPage = window.location.href.includes('applications');
     // @ts-ignore
-    const image_src = imageMap[vc['Название объекта']];
+    const image_src = imageMap[vc['Название объекта']] || imageMap[vc['Название программы']];
     return (
         <div className={classes.result}>
             <div className={classes.info}>
