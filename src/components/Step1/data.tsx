@@ -67,6 +67,11 @@ export const recommendation_types = [
     'Инжиниринговые центры', 'Офисы и коворкинги', 'Сервисы развития', 'Площадки пилотного тестирования'
 ];
 
+export const recommendation_types_map = {
+    'Венчурные фонды': 'vcs',
+    'Акселераторы': 'accs'
+}
+
 export const vcs = {
     "0": {
         "index": 119,

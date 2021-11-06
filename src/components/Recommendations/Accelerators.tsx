@@ -29,19 +29,29 @@ interface AcceleratorsProps {
     selected: boolean[];
     setSelected: (id: number) => (value: boolean) => void;
     setShowVC: (id: number) => void;
+    favList: number[];
+    setFav: (value: number[]) => void;
 }
 
-export default function Accelerators({ vcs, selected, setSelected, setShowVC }: AcceleratorsProps) {
+export default function Accelerators({ vcs, selected, setSelected, setShowVC, favList, setFav }: AcceleratorsProps) {
     const classes = useStyles();
 
+    const toggleFav = (id: number) => () => {
+        if (favList.includes(id)) {
+            setFav(favList.filter(f => f !== id));
+        } else {
+            setFav([...favList, id]);
+        }
+    }
+
     return (
-        <div className={classes.container}>
+        <div id='accs' className={classes.container}>
             {/* <hr className={classes.line1} /> */}
             <div className={classes.heading}>
                 Акселераторы
             </div>
             {Object.values(vcs).map((vc, id) =>
-                <Recommendation vc={vc} id={id} selected={selected[id]} setShowVC={setShowVC} />
+                <Recommendation vc={vc} id={id} selected={selected[id]} setShowVC={setShowVC} fav={favList.includes(id)} setFav={toggleFav(id)} />
             )}
 
         </div >

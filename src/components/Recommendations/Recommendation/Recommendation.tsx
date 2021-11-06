@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import { ReactComponent as StarIcon } from '../../../assets/icons/star.svg';
 import { ReactComponent as Watch } from '../../../assets/icons/watch.svg';
 import Zerno from '../../../assets/zerno.jpg';
+import { ReactComponent as StarGrey } from '../../../assets/star.svg';
 
 
 const useStyles = makeStyles({
@@ -13,6 +14,7 @@ const useStyles = makeStyles({
         width: '947px',
         minHeight: '187px',
         boxShadow: '0px 4px 34px rgba(66, 76, 101, 0.08)',
+        border: '1px solid #F8F8FB',
         borderRadius: '3px',
         paddingTop: '35px',
         marginBottom: '20px',
@@ -170,9 +172,11 @@ interface RecommendationProps {
     id: number;
     selected: boolean;
     setShowVC: (id: number) => void;
+    fav: boolean;
+    setFav: () => void;
 }
 
-export default function Recommendation({ vc, id, selected, setShowVC }: RecommendationProps) {
+export default function Recommendation({ vc, id, selected, setShowVC, fav, setFav }: RecommendationProps) {
     const classes = useStyles();
 
     const fields = ['тип', 'Объем фонда, $ млн', 'Количество инвестиций', 'Exit', 'Год основания'];
@@ -181,7 +185,7 @@ export default function Recommendation({ vc, id, selected, setShowVC }: Recommen
     return (
         <div className={classes.result}>
             <div className={classes.info}>
-                <img className={classes.icon}  />
+                <img className={classes.icon} />
                 <div className={classes.titleContainer}>
                     <div className={classes.label}>
                         Венчурный фонд
@@ -251,8 +255,11 @@ export default function Recommendation({ vc, id, selected, setShowVC }: Recommen
                                 Подробнее
                             </Button>
 
-                            <div className={classes.favbtn}>
-                                <StarIcon display='block' style={{ margin: 'auto', marginTop: '10px' }} />
+                            <div className={classes.favbtn} onClick={() => setFav()}>
+                                {!fav ?
+                                    <StarGrey display='block' style={{ margin: 'auto', marginTop: '10px' }} />
+                                    : <StarIcon display='block' style={{ margin: 'auto', marginTop: '10px' }} />
+                                }
                             </div>
                         </>
                     }
