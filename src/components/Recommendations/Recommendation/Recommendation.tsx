@@ -6,6 +6,7 @@ import { ReactComponent as Watch } from '../../../assets/icons/watch.svg';
 import Zerno from '../../../assets/zerno.jpg';
 import { ReactComponent as StarGrey } from '../../../assets/star.svg';
 import { Link } from 'react-router-dom';
+import { imageMap } from '../../Step1/data';
 
 
 const useStyles = makeStyles({
@@ -200,21 +201,25 @@ interface RecommendationProps {
 export default function Recommendation({ vc, type, id, selected, fav, setFav }: RecommendationProps) {
     const classes = useStyles();
 
-    const fields = ['тип', 'Объем фонда, $ млн', 'Количество инвестиций', 'Exit', 'Год основания'];
-    const values = [`${vc['Тип по источнику возник-ния']}, ${vc['Форма собственности']}`, vc['Общий объем фондов, $ млн'], vc['Количество инвестиций'], vc['Количество выходов'], vc['Год основания']];
-
+    let fields = ['тип', 'Объем фонда, $ млн', 'Количество инвестиций', 'Exit', 'Год основания'];
+    let values = [`${vc['Тип по источнику возник-ния'] || ''}, ${vc['Форма собственности'] || ''}`, vc['Общий объем фондов, $ млн'], vc['Количество инвестиций'], vc['Количество выходов'], vc['Год основания']];
+    if (type === 'ac') {
+        fields = ['№ Набора', 'Условия участия', 'Статус программы', 'Год основания'];
+        values = [vc['№ Набора'], vc['Условия участия'], vc['Статус программы'], vc['Год основания']];
+    }
     const applicationsPage = window.location.href.includes('applications');
-
+    // @ts-ignore
+    const image_src = imageMap[vc['Название объекта']];
     return (
         <div className={classes.result}>
             <div className={classes.info}>
-                <img className={classes.icon} />
+                <img className={classes.icon} src={image_src} />
                 <div className={classes.titleContainer}>
                     <div className={classes.label}>
-                        Венчурный фонд
+                        {type === 'vc' ? 'Венчурный фонд' : 'Акселератор'}
                     </div>
                     <div className={classes.title}>
-                        {vc['Название объекта']}
+                        {vc['Название объекта'] || vc['Название программы']}
                     </div>
                 </div>
 
@@ -227,14 +232,16 @@ export default function Recommendation({ vc, type, id, selected, fav, setFav }: 
                     </div>
                 </div>
 
-                <div className={classes.roundsContainer}>
-                    <div className={classes.label}>
-                        РАУНДЫ ИНВЕСТИРОВАНИЯ
+                {vc['Раунд инвестирования'] ?
+                    <div className={classes.roundsContainer}>
+                        <div className={classes.label}>
+                            РАУНДЫ ИНВЕСТИРОВАНИЯ
+                        </div>
+                        <div className={classes.rounds}>
+                            {vc['Раунд инвестирования']}
+                        </div>
                     </div>
-                    <div className={classes.rounds}>
-                        {vc['Раунд инвестирования']}
-                    </div>
-                </div>
+                    : <></>}
             </div>
 
             <hr className={classes.line2} />

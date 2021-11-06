@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { darken, makeStyles } from "@material-ui/core/styles";
-import { recommendation_types, recommendation_types_map } from '../../Step1/data';
-import VCFunds from '../VCs/VCFunds';
-import VCInfo from '../Recommendation/VCInfo/VCInfo';
-import Accelerators from '../Accelerators/Accelerators';
+import { recommendation_types } from '../../Step1/data';
 import { ReactComponent as Warning } from '../../../assets/icons/warning.svg';
 import { Link } from 'react-router-dom';
 import CheckboxContainer from '../../Input/CheckboxContainer';

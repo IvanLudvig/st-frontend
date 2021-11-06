@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import TopBar from './TopBar';
 import Zerno from '../../../../assets/zerno.jpg';
 import { YMaps, Map as YMap, Placemark } from 'react-yandex-maps';
+import { imageMap } from '../../../Step1/data';
 
 const useStyles = makeStyles({
     container: {
@@ -139,14 +140,15 @@ const useStyles = makeStyles({
 
 interface VCInfoProps {
     vcs: any;
+    type: 'vc' | 'ac';
     selectedAll: number[];
     setSelectedAll: (value: number[]) => void;
 }
 
-export default function VCInfo({ vcs, selectedAll, setSelectedAll }: VCInfoProps) {
+export default function VCInfo({ vcs, type, selectedAll, setSelectedAll }: VCInfoProps) {
     const classes = useStyles();
 
-    
+
     // const { id } = useParams().match.params;
     // console.log(id);
     const split = window.location.href.split('/');
@@ -164,29 +166,36 @@ export default function VCInfo({ vcs, selectedAll, setSelectedAll }: VCInfoProps
     }
 
     const vc = vcs[id];
-    const fields = ['РАУНДЫ ИНВЕСТИРОВАНИЯ', 'тип', 'Количество инвестиций', 'Exit', 'Год основания'];
-    const values = [vc['Раунд инвестирования'], `${vc['Тип по источнику возник-ния']}, ${vc['Форма собственности']}`,
+    let fields = ['РАУНДЫ ИНВЕСТИРОВАНИЯ', 'тип', 'Количество инвестиций', 'Exit', 'Год основания'];
+    let values = [vc['Раунд инвестирования'], `${vc['Тип по источнику возник-ния'] || ''}, ${vc['Форма собственности'] || ''}`,
     vc['Количество инвестиций'], vc['Количество выходов'], vc['Год основания']
     ];
+    if (type === 'ac') {
+        fields = ['№ Набора', 'Условия участия', 'Статус программы', 'Год основания'];
+        values = [vc['№ Набора'], vc['Условия участия'], vc['Статус программы'], vc['Год основания']];
+    }
 
-    const contact_fields = ['Сайт', 'Ближайшая станция метро', 'Адрес'];
-    const contact_values = [vc['Сайт'], vc['Ближайшая станция метро'], vc['Адрем']];
+    const contact_fields = ['Сайт', 'Ближайшая станция метро', 'Адрес', 'Тип оператора', 'Формат обучения',];
+    const contact_values = [vc['Сайт'], vc['Ближайшая станция метро'], vc['Адрес'], vc['Тип оператора'], vc['Формат обучения:']];
 
+    //@ts-ignore
+    const image_src = imageMap[vc['Название объекта']];
     return (
         <div className={classes.container}>
             <TopBar title='Zerno ventures' />
             <div className={classes.iconContainer}>
-                <img className={classes.icon} />
+
+                <img className={classes.icon} src={image_src} />
             </div>
 
             <div className={classes.content}>
                 <div className={classes.titleBar}>
 
                     <div className={classes.label}>
-                        Венчурный фонд
+                        {type === 'vc' ? 'Венчурный фонд' : 'Акселератор'}
                     </div>
                     <div className={classes.title}>
-                        {vc['Название объекта']}
+                        {vc['Название объекта'] || vc['Название программы']}
                     </div>
                 </div>
                 <div className={classes.aboutSection}>

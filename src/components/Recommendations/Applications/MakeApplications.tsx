@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { darken, makeStyles } from "@material-ui/core/styles";
-import { recommendation_types } from '../../Step1/data';
 import VCFunds from './Results/VCFunds';
-import VCInfo from '../Recommendation/VCInfo/VCInfo';
 import Accelerators from './Results/Accelerators';
 import { ReactComponent as Star } from '../../../assets/star.svg';
 import { ReactComponent as Stack } from '../../../assets/stack.svg';

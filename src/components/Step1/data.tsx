@@ -39,6 +39,7 @@ export const investorTypes = [
     { label: 'Акселератор', icon: <Circle stroke='#848FA6' />, selectedIcon: <Circle stroke='#FF1F55' /> },
 ]
 
+export const moneyMap = [10000, 100000, 500000, 1000000, 5000000];
 export const moneyOptions = [
     {
         value: 1,
@@ -308,4 +309,12 @@ export const vcs = {
         "Комментарии": null,
         "Опубл. на Startup Guide (да\/нет)": "Да"
     }
+}
+
+
+export const imageMap = {
+    'Altergate': 'https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/224375835_197933812355116_4884082533451497991_n.png?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=WmssUC9D3TQAX8ZqRif&_nc_ht=scontent-arn2-1.xx&oh=c9c69a9fa36c4f9988b99154f1b95042&oe=618BF195',
+    'ИК Криптонит': 'https://www.tadviser.ru/images/5/56/%D0%9A%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%BD%D0%B8%D1%82_%D0%BB%D0%BE%D0%B3%D0%BE.png',
+    'Elevator Venture': 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/zvtrcyuhmd4hbmlzxwrw',
+    'Impulse VC': 'https://d2kq0urxkarztv.cloudfront.net/561e6d242892fcf47f798ea1/2079892/upload-9043be2c-a8f0-4e43-8bcb-57ea345c2c06.png?w=260&e=webp&nll=true'
 }

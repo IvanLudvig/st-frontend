@@ -7,7 +7,6 @@ import { Footer } from './Footer/Footer';
 import Step1 from './Step1/Step1';
 import { Grid } from '@material-ui/core';
 import MainPage from './MainPage/MainPage';
-import VCInfo from './Recommendations/Recommendation/VCInfo/VCInfo';
 import { ReactComponent as Menu } from '../assets/menu.svg';
 import Recommendations from './Recommendations/Recommendations';
 import { moneyOptions, stageRows } from './Step1/data';
