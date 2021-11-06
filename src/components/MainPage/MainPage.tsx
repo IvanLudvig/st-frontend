@@ -4,14 +4,20 @@ import MainPage0 from '../../assets/mainpage0.png';
 import MainPage1 from '../../assets/mainpage1.png';
 import MainPage2 from '../../assets/mainpage2.png';
 import { Link } from 'react-router-dom';
+import { ReactComponent as Menu } from '../../assets/menu.svg';
 
 const useStyles = makeStyles({
     content: {
+        display: 'inline-block',
         position: 'absolute',
         width: '1008px',
         top: '93px',
         left: '358px',
-        fontFamily: 'IBM Plex Sans'
+        fontFamily: 'IBM Plex Sans',
+        background: '#ff0000',
+        // paddingBottom: '1800px',
+        // height: '1500px'
+        // height: '100%',
     },
     bar: {
         margin: 0,
@@ -64,7 +70,19 @@ const useStyles = makeStyles({
         position: 'absolute',
         left: 0,
         top: '694px',
-        width: '1008px'
+        width: '1008px',
+        marginBottom: '1200px'
+    },
+    sidebarContainer: {
+        position: 'absolute',
+        height: '1353px',
+        width: '358px',
+        top: 0,
+        background: '#24314A',
+        backgroundColor: '#24314A',
+    },
+    sidebar: {
+        width: '358px'
     }
 });
 
@@ -74,20 +92,25 @@ export default function MainPage() {
 
 
     return (
-        <div className={classes.content}>
-            <img src={MainPage0} className={classes.img} />
-            <div className={classes.bar}>
-                <span className={classes.title}>
-                    Стартапам и технологическим компаниям
-                </span>
-                <Link to='/recommendation-system'>
-                    <div className={classes.btn}>
-                        Рекомендательные системы для стартапов
-                    </div>
-                </Link>
+        <>
+            <div className={classes.sidebarContainer}>
+                <Menu className={classes.sidebar} />
             </div>
-            <img src={MainPage1} className={classes.img1} />
-            <img src={MainPage2} className={classes.img2} />
-        </div>
+            <div className={classes.content}>
+                <img src={MainPage0} className={classes.img} />
+                <div className={classes.bar}>
+                    <span className={classes.title}>
+                        Стартапам и технологическим компаниям
+                    </span>
+                    <Link to='/recommendation-system'>
+                        <div className={classes.btn}>
+                            Рекомендательные системы для стартапов
+                        </div>
+                    </Link>
+                </div>
+                <img src={MainPage1} className={classes.img1} />
+                <img src={MainPage2} className={classes.img2} />
+            </div>
+        </>
     )
 }

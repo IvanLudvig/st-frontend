@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { recommendation_types, vcs } from '../Step1/data';
-import VCFunds from './VCFunds';
+import VCFunds from './VCs/VCFunds';
 import VCInfo from './Recommendation/VCInfo/VCInfo';
+import Accelerators from './Accelerators';
 
 
 const useStyles = makeStyles({
     content: {
-        position: 'absolute',
+        position: 'relative',
         width: '1008px',
         top: '93px',
-        left: '358px'
+        marginLeft: '358px',
+        display: 'inline-block',
+        height: '100%',
+        marginBottom: '100px'
     },
     header: {
         background: '#24314A',
@@ -104,6 +108,8 @@ export default function Recommendations({ selected, setSelected }: VCFundsProps)
                 </div>
 
                 <VCFunds vcs={vcs} selected={selected} setSelected={setSelectedVC} setShowVC={setShowVC} />
+
+                <Accelerators vcs={vcs} selected={selected} setSelected={setSelectedVC} setShowVC={setShowVC} />
 
             </div>
         </div>

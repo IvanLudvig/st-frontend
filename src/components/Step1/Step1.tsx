@@ -9,6 +9,7 @@ import { Button, Checkbox } from '@material-ui/core';
 import MyCheckbox from '../Input/MyCheckbox';
 import MySlider from '../Input/MySlider';
 import { Link } from 'react-router-dom';
+import { ReactComponent as Menu } from '../../assets/menu.svg';
 
 
 const useStyles = makeStyles({
@@ -17,8 +18,9 @@ const useStyles = makeStyles({
         background: '#24314A',
         width: '1008px',
         top: '93px',
+        bottom: 0,
         left: '358px',
-        marginBottom: '100px',
+        height: '100%',
         paddingBottom: '200px'
     },
     title: {
@@ -146,7 +148,18 @@ const useStyles = makeStyles({
             color: '#FF1F55',
             backgroundColor: '#24314A'
         }
-    }
+    },
+    sidebarContainer: {
+        position: 'absolute',
+        height: '1300px',
+        width: '358px',
+        top: 0,
+        background: '#24314A',
+        backgroundColor: '#24314A',
+    },
+    sidebar: {
+        width: '358px'
+    },
 });
 
 
@@ -168,6 +181,9 @@ export default function Step1() {
 
     return (
         <>
+            <div className={classes.sidebarContainer}>
+                <Menu className={classes.sidebar} />
+            </div>
             <div className={classes.content}>
                 <div className={classes.title}>
                     Рекомендательные системы для стартапов

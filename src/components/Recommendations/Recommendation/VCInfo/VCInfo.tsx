@@ -10,10 +10,10 @@ const useStyles = makeStyles({
         top: '93px',
         left: '358px',
         display: 'inline-block',
-        position: 'absolute',
+        position: 'relative',
         background: '#F2F3F6',
         width: '1008px',
-        paddingBottom: '100px'
+        marginBottom: '80px'
     },
     content: {
         width: '666px',
@@ -208,9 +208,9 @@ export default function VCInfo({ vc, selected, setSelected, setShowVC }: VCInfoP
                     <Button className={classes.btn} variant='contained' onClick={() => setSelected(!selected)}>
                         {selected ? 'Добавлено к заявке' : '+Добавить  к заявке'}
                     </Button>
-                    <Button className={classes.btn} variant='contained' onClick={() => setSelected(!selected)}>
+                    {/* <Button className={classes.btn} variant='contained' onClick={() => setSelected(!selected)}>
                         Получить услугу
-                    </Button>
+                    </Button> */}
                 </div>
                 <div className={classes.helpertext}>
                     Добавляйте компании к “Заявке” чтобы выслать предложение сразу всем интересующим вас компаниям

@@ -24,21 +24,21 @@ const useStyles = makeStyles({
 });
 
 
-interface VCFundsProps {
+interface AcceleratorsProps {
     vcs: any;
     selected: boolean[];
     setSelected: (id: number) => (value: boolean) => void;
     setShowVC: (id: number) => void;
 }
 
-export default function VCFunds({ vcs, selected, setSelected, setShowVC }: VCFundsProps) {
+export default function Accelerators({ vcs, selected, setSelected, setShowVC }: AcceleratorsProps) {
     const classes = useStyles();
 
     return (
         <div className={classes.container}>
             {/* <hr className={classes.line1} /> */}
             <div className={classes.heading}>
-                Венчурные фонды
+                Акселераторы
             </div>
             {Object.values(vcs).map((vc, id) =>
                 <Recommendation vc={vc} id={id} selected={selected[id]} setShowVC={setShowVC} />

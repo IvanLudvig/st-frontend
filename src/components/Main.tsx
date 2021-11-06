@@ -9,13 +9,38 @@ import { Grid } from '@material-ui/core';
 import MainPage from './MainPage/MainPage';
 import Recommendations from './Recommendations/Recommendations';
 import VCInfo from './Recommendations/Recommendation/VCInfo/VCInfo';
+import { ReactComponent as Menu } from '../assets/menu.svg';
 
 
 const useStyles = makeStyles({
     root: {
         width: '1366px',
         fontFamily: 'IBM Plex Sans',
-        background: '#fff',
+        background: '#24314A',
+        height: '100%',
+        display: 'flex',
+        flexFlow: 'column'
+    },
+    sidebarContainer: {
+        flex: 100,
+        position: 'absolute',
+        height: '100%',
+        width: '358px',
+        top: 0,
+        bottom: '-1000px',
+        background: '#24314A',
+        backgroundColor: '#24314A',
+    },
+    sidebar: {
+        width: '358px'
+    },
+    content: {
+        // flex: '1 1 auto',
+        flex: 100,
+        width: '1008px',
+        // display: 'inline-block',
+        position: 'absolute',
+        // height: '100%'
     }
 });
 
@@ -27,23 +52,24 @@ export default function Main() {
 
     return (
         <Router>
-
-
-
             <div className={classes.root}>
-
-                <NavDrawer />
                 <HeaderBar />
-                {/* <Route exact path="/recommendation-system/vc/:i" render={() => <VCInfo selected={selected} setSelected={setSelected} />} /> */}
-                <Route exact path="/recommendation-system/result" render={() => <Recommendations selected={selected} setSelected={setSelected} />} />
-                <Route exact path="/recommendation-system/" component={Step1} />
-                <Route exact path="/" component={MainPage} />
+
+
+                <div className={classes.sidebarContainer}>
+                    {/* <img className={classes.sidebar} src={Menu} /> */}
+                    <Menu className={classes.sidebar} />
+                </div>
+
+                    {/* <NavDrawer /> */}
+                    {/* <Route exact path="/recommendation-system/vc/:i" render={() => <VCInfo selected={selected} setSelected={setSelected} />} /> */}
+                    <Route exact path="/recommendation-system/result" render={() => <Recommendations selected={selected} setSelected={setSelected} />} />
+                    <Route exact path="/recommendation-system/" component={Step1} />
+                    <Route exact path="/" component={MainPage} />
+
 
             </div>
 
-            {/* <Grid xs={12}>
-                    <Footer />
-                </Grid> */}
 
         </Router>
     )
