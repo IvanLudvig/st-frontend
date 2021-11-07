@@ -347,5 +347,6 @@ export const imageMap = {
     'Moscow Seed Fund': 'https://media.rbcdn.ru/media/investor/ou8xt4azetv5pm79oczpgmrzyuscs9ny.jpg.238x400_q85.jpg',
     'Vershina Capital': 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/lckhmghtlmz34cgml39a',
     'A.Partners': 'https://media-exp1.licdn.com/dms/image/C4E0BAQH9Mjz-p5xJdA/company-logo_200_200/0/1519911429096?e=2159024400&v=beta&t=z73TRP-EGWWkvB1xyZRsent_mgZdAChzXP-SpmvaWR8',
-    'Genesis Investments': 'https://api.rocketdao.io/file/7077/view?w=200'
+    'Genesis Investments': 'https://api.rocketdao.io/file/7077/view?w=200',
+    'NP Capital': 'https://media-exp1.licdn.com/dms/image/C4D0BAQEjVf_7Y4g-cg/company-logo_200_200/0/1542018831739?e=2159024400&v=beta&t=cmT2pmh4LuVDzfxG9JTztl6Fzme5J9uIGCVjborEFrs'
 }
