@@ -209,7 +209,7 @@ export default function VCInfo({ vcs, type, selectedAll, setSelectedAll }: VCInf
                 <div className={classes.statsSection}>
                     {fields.map((field: string, i: number) =>
                         <>
-                            {values[i] &&
+                            {values[i] ?
                                 <div className={classes.stat}>
                                     <div className={classes.statLabel}>
                                         {field}
@@ -217,7 +217,9 @@ export default function VCInfo({ vcs, type, selectedAll, setSelectedAll }: VCInf
                                     <div className={classes.statNumber}>
                                         {values[i]}
                                     </div>
-                                </div>}
+                                </div>
+                                : <></>
+                            }
                         </>
                     )}
                 </div>
@@ -239,6 +241,21 @@ export default function VCInfo({ vcs, type, selectedAll, setSelectedAll }: VCInf
                 </div>
                 <div className={classes.options}>
                     {vc['Рынок'].split('|').map((option: string) =>
+                        <div
+                            className={classes.optionContainer}
+                        >
+                            <span className={classes.optionLabel}>
+                                {option}
+                            </span>
+                        </div>
+                    )}
+                </div>
+
+                <div className={classes.label}>
+                    Сервисы
+                </div>
+                <div className={classes.options}>
+                    {vc['Сервисы']?.split('|').map((option: string) =>
                         <div
                             className={classes.optionContainer}
                         >

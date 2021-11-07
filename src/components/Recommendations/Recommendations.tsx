@@ -124,9 +124,9 @@ export default function Recommendations({ checkboxes, setCheckboxes, market, set
                         obj[key] = vcs[key] as any;
                         return obj;
                     }, {})}
-                    accs={Object.keys(vcs).filter(id => selected['ac'].includes(parseInt(id))).reduce((obj: any, key: string) => {
+                    accs={Object.keys(acs).filter(id => selected['ac'].includes(parseInt(id))).reduce((obj: any, key: string) => {
                         //@ts-ignore
-                        obj[key] = vcs[key] as any;
+                        obj[key] = acs[key] as any;
                         return obj;
                     }, {})}
                     selected={selected}
