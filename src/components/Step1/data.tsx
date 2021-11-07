@@ -341,5 +341,11 @@ export const imageMap = {
     'Cabra VC': 'https://media-exp1.licdn.com/dms/image/C560BAQHglpIaZKl3OA/company-logo_200_200/0/1519887855399?e=2159024400&v=beta&t=Z2bsAIRu7GFSLkozQCchMTzK_Q5nPbLziXF-uGJkkG0',
     'Акселератор MTS StartUp Hub ': 'https://scontent-arn2-1.xx.fbcdn.net/v/t1.6435-9/199788810_2636482923318796_4327723071417765384_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Yw-EPptexNAAX_hT769&_nc_ht=scontent-arn2-1.xx&oh=e326e136f7f0d0995d4a9de805c6f4f8&oe=61AC4A21',
     'Continental SportsTech Accelerator': 'https://i1.sndcdn.com/artworks-EPKguE4Xw7KSeQEa-vgxX1Q-t500x500.jpg',
-    'Акселератор РСХБ': 'https://pbs.twimg.com/profile_images/952899724914446336/9itJSe9x.jpg'
+    'Акселератор РСХБ': 'https://pbs.twimg.com/profile_images/952899724914446336/9itJSe9x.jpg',
+    'ТилТех Капитал': 'https://lh3.googleusercontent.com/proxy/1q-lUKdSTo9TgxNJ3asuw2gMIPT6XLB3zdRdEedpA9mzSOg7iWzqB_Nipwum-xIwGDWJ7-D9ZgKD1R7zFH-qMky6m6D8jFBgNrLZngYvKH1KpKEtahWdrMAlH3ZCKkM',
+    'NRG Ventures': 'https://media.rbcdn.ru/media/investor/nrgventures.png.238x400_q85.jpg',
+    'Moscow Seed Fund': 'https://media.rbcdn.ru/media/investor/ou8xt4azetv5pm79oczpgmrzyuscs9ny.jpg.238x400_q85.jpg',
+    'Vershina Capital': 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/lckhmghtlmz34cgml39a',
+    'A.Partners': 'https://media-exp1.licdn.com/dms/image/C4E0BAQH9Mjz-p5xJdA/company-logo_200_200/0/1519911429096?e=2159024400&v=beta&t=z73TRP-EGWWkvB1xyZRsent_mgZdAChzXP-SpmvaWR8',
+    'Genesis Investments': 'https://api.rocketdao.io/file/7077/view?w=200'
 }

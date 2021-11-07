@@ -237,7 +237,7 @@ export default function VCInfo({ vcs, type, selectedAll, setSelectedAll }: VCInf
                 </div>
 
                 <div className={classes.label}>
-                    Направления
+                    Рынок
                 </div>
                 <div className={classes.options}>
                     {vc['Рынок'].split('|').map((option: string) =>
